@@ -1,14 +1,23 @@
-<!DOCTYPE html>
-<html lang="{% if page.language %}{{ page.language | downcase }}{% else %}{{ site.language | downcase }}{% endif %}">
-{% include head.html %}
+---
+layout: compress
+---
+<!doctype html>
+<html class="no-js" lang="{% if site.language == nil %}en{% else %}{{ site.language }}{% endif %}">
+<head>
+	{% include _head.html %}
+</head>
+<body id="top-of-page" class="{{ layout.format }}">
+	{% unless page.skip_boilerplate %}
+	{% include _navigation.html %}
+	{% endunless %}
 
-<body class="home-template">
-    <div class="site-wrapper">
-        {% include header.html %}
-        {{ content }}
-        {% include footer.html %}
-    </div>
+	{% include _masthead.html %}
+	{{ content }}
+
+	{% unless page.skip_boilerplate %}
+	{% include _footer.html %}
+	{% endunless %}
+
+	{% include _footer_scripts.html %}
 </body>
-
-{% include global.html %}
 </html>
